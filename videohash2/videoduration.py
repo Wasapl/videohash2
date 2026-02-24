@@ -14,7 +14,8 @@ def video_duration(url: Optional[str] = None,
                    path: Optional[str] = None,
                    storage_path: Optional[str] = None,
                    do_not_copy: Optional[bool] = True,
-                   ffmpeg_path: Optional[str] = None
+                   ffmpeg_path: Optional[str] = None,
+                   yt_dlp_options: Optional[str] = None
                    ) -> float:
     
     """
@@ -52,14 +53,15 @@ def video_duration(url: Optional[str] = None,
         video_dir, video_download_dir = _create_required_dirs_and_check_for_errors(
             url=url,
             storage_path=storage_path
-            )[0:2]
+            )[1:3]
 
         path = _copy_video_to_video_dir(
             video_dir,
             video_download_dir,
             do_not_copy=do_not_copy,
             download_worst=True,
-            url=url
+            url=url,
+            yt_dlp_options=yt_dlp_options
         )
 
     command = f'"{ffmpeg_path}" -i "{path}"'
@@ -76,12 +78,12 @@ def video_duration(url: Optional[str] = None,
 
     hours, minutes, seconds = duration_string.strip().split(":")
 
-    if url and path:
-        cutPath = path[:path.find("/temp_storage_dir")]
+    # if url and path:
+    #     cutPath = path[:path.find("/temp_storage_dir")]
 
-        try:
-            shutil.rmtree(cutPath)
-        except OSError as e:
-            print("Error: %s - %s." % (e.filename, e.strerror))
+    #     try:
+    #         shutil.rmtree(cutPath)
+    #     except OSError as e:
+    #         print("Error: %s - %s." % (e.filename, e.strerror))
 
     return float(hours) * 60.00 * 60.00 + float(minutes) * 60.00 + float(seconds)

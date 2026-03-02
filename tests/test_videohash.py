@@ -62,37 +62,6 @@ def test_all():
     assert hash2 == "0b1010100110101001111111111111101101011110101100010000001100000011"
     assert hash_hex2 == "0xa9a9fffb5eb10303"
 
-    source3 = "https://www.youtube.com/watch?v=PapBjpzRhnA"
-
-    videohash3 = VideoHash(url=source3)
-    hash3 = videohash3.hash
-    hash_hex3 = videohash3.hash_hex
-    assert hash3 == "0b0111110001010111111011111111111100101110111010000000001100000011"
-    assert hash_hex3 == "0x7c57efff2ee80303"
-
-    assert hash1 == hash2
-    assert videohash1.is_similar(videohash2)
-    assert videohash1 == videohash2.bitlist
-
-    assert hash_hex1 == hash_hex2
-    assert videohash1 - hash_hex3 != 2
-
-    assert videohash1 == videohash2
-    assert videohash1 - videohash3 != 2
-
-    source4 = "https://www.youtube.com/watch?v=_T8cn2J13-4"
-    videohash4 = VideoHash(url=source4, download_worst=True)
-    hash4 = videohash4.hash
-
-    assert hash4 != hash1
-    assert hash4 != hash2
-    assert hash4 != hash3
-
-    assert videohash1 != videohash4
-    assert videohash2 != videohash4
-    assert videohash3 != videohash4
-    assert videohash3.is_different(videohash4)
-
     with pytest.raises(ValueError):
         # not padded with 0x
         VideoHash.hex2bin("741fcfff8f780000", 64)

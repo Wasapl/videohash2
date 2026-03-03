@@ -36,4 +36,4 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v6
       with:
-        path: $RUNNER_TEMP
+        path: $TMPDIR/tmp*/temp_storage_dir/

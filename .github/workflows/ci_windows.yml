@@ -38,6 +38,6 @@ jobs:
         pytest --cov=videohash2 tests/ -v
     - name: upload artifacts
       if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v6
       with:
         path: $RUNNER_TEMP

@@ -36,3 +36,8 @@ jobs:
         ffmpeg -version
         python setup.py sdist bdist_wheel
         pytest --cov=videohash2 tests/ -v
+    - name: upload artifacts
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        path: $RUNNER_TEMP

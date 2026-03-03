@@ -29,3 +29,8 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: upload artifacts
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        path: $RUNNER_TEMP

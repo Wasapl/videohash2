@@ -15,6 +15,7 @@ def test_all():
         "https://raw.githubusercontent.com/demmenie/videohash2/main/assets/rocket.mkv"
     )
     videohash1 = VideoHash(url=source1, frame_interval=3)
+    print (f'videohash1.hash: {videohash1.storage_path}')
     hash1 = videohash1.hash
     hash_hex1 = videohash1.hash_hex
     assert hash1 == "0b1010100110101001111111111111101101011110101100010000001100000011"

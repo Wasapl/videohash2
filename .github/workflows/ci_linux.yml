@@ -44,10 +44,11 @@ jobs:
         mypy
     - name: Test with pytest
       run: |
+        mkdir vh
         pytest
         exit 1
     - name: upload artifacts
       if: always()
       uses: actions/upload-artifact@v6
       with:
-        path: $RUNNER_TEMP
+        path: vh

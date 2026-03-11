@@ -10,11 +10,11 @@ this_dir = os.path.dirname(os.path.realpath(__file__))
 
 
 def test_all():
-
+    storage_path = os.path.join(os.getcwd(), 'vh')
     source1 = (
         "https://raw.githubusercontent.com/demmenie/videohash2/main/assets/rocket.mkv"
     )
-    videohash1 = VideoHash(url=source1, frame_interval=3)
+    videohash1 = VideoHash(url=source1, frame_interval=3, storage_path=storage_path)
     print (f'videohash1.hash: {videohash1.storage_path}')
     hash1 = videohash1.hash
     hash_hex1 = videohash1.hash_hex

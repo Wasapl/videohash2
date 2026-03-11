@@ -141,6 +141,11 @@ class MakeCollage:
         scale = (self.collage_image_width) / (
             self.images_per_row_in_collage * frame_image_width
         )
+        # If the scale is greater than 1, that means the images are getting upscaled,
+        # which is not desirable. Thus we downsize collage image width.
+        if scale > 1:
+            scale = 1
+            self.collage_image_width = self.images_per_row_in_collage * frame_image_width
 
         # Calculating the scaled height and width for the frame image.
         scaled_frame_image_width = ceil(frame_image_width * scale)

@@ -17,6 +17,9 @@ jobs:
       matrix:
         python-version: ['3.11']
     steps:
+    - shell: bash
+      run: |
+        printenv
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
@@ -35,4 +38,11 @@ jobs:
         [Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";D:\a\videohash2\videohash2", [System.EnvironmentVariableTarget]::Process)
         ffmpeg -version
         python setup.py sdist bdist_wheel
+        mkdir vh
         pytest --cov=videohash2 tests/ -v
+    - name: upload artifacts
+      if: always()
+      uses: actions/upload-artifact@v6
+      with:
+        path: vh
+        name: vh_temp_files_win
